@@ -23590,7 +23590,7 @@ function pushNotif(opts){
   if((opts.channel==="push"||!opts.channel) && typeof Notification!=="undefined" && Notification.permission==="granted"){
     try{
       new Notification("AMBI241 — "+opts.title,{
-        body:opts.msg, icon:"/ambi241/favicon.ico", tag:opts.key
+        body:opts.msg, icon:"icon-night-192.png", tag:opts.key
       });
     }catch(ex){}
   }

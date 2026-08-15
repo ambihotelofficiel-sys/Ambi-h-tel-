@@ -1,73 +1,39 @@
 {
-  "name": "AMBI241 - Ambiance Libreville en Direct",
-  "short_name": "AMBI241",
-  "description": "Trouvez l'ambiance des bars et restaurants de Libreville en temps réel. Votes live, carte interactive, événements flash.",
-  "start_url": "https://ambi241.com",
-  "scope": "/",
+  "name": "AMBI HÔTELS ET MOTELS",
+  "short_name": "AMBI HOTEL",
+  "description": "Réservez chambre en un clic — hôtels et motels à Libreville, disponibilités et tarifs en temps réel.",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#1a0a28",
-  "theme_color": "#ff2d9b",
+  "theme_color": "#ff2d95",
   "orientation": "portrait-primary",
   "prefer_related_applications": false,
-  "screenshots": [
-    {
-      "src": "https://ambi241.com/og-image.jpg",
-      "sizes": "1200x630",
-      "form_factor": "wide",
-      "type": "image/jpeg"
-    }
-  ],
   "icons": [
     {
-      "src": "https://ambi241.com/favicon.png",
+      "src": "icon-night-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "https://ambi241.com/favicon.png",
+      "src": "icon-night-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "https://ambi241.com/apple-touch-icon.png",
-      "sizes": "180x180",
+      "src": "icon-night-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icon-night-maskable-512.png",
+      "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
     }
   ],
-  "categories": [
-    "lifestyle",
-    "entertainment",
-    "business"
-  ],
-  "shortcuts": [
-    {
-      "name": "Voir les bars",
-      "short_name": "Bars",
-      "description": "Consultez la liste des bars avec les ambiances en direct",
-      "url": "https://ambi241.com/?view=bars",
-      "icons": [
-        {
-          "src": "https://ambi241.com/favicon.png",
-          "sizes": "192x192",
-          "type": "image/png"
-        }
-      ]
-    },
-    {
-      "name": "Voir la carte",
-      "short_name": "Carte",
-      "description": "Explorez les établissements sur la carte interactive",
-      "url": "https://ambi241.com/?view=map",
-      "icons": [
-        {
-          "src": "https://ambi241.com/favicon.png",
-          "sizes": "192x192",
-          "type": "image/png"
-        }
-      ]
-    }
-  ]
+  "categories": ["lifestyle", "travel", "business"]
 }
