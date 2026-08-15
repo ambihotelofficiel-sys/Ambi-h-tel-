@@ -32,7 +32,7 @@ const FIRESTORE_COLLECTIONS = {
 const ADMIN_CONFIG = {
   // PIN haché SHA-256 — REMPLACER par votre vrai hash en production
   // Pour générer : https://emn178.github.io/online-tools/sha256.html
-PIN_HASH: "2c624232cdd221771294dfbb310acbc8b223c8b8d50e8595fe7a7a2c77e2b993",
+PIN_HASH: "0e3803a9c7361edd5a4ef83c013db8b952cab73373150ff24d3d73d92c40bad2",
 
   // Tentatives max avant blocage temporaire
   MAX_LOGIN_ATTEMPTS: 5,
