@@ -7668,7 +7668,7 @@ if (document.readyState === 'loading') {
 <header>
   <div class="header-top">
   <a class="logo-wrap" onclick="goHome()" style="text-decoration:none;cursor:pointer;">
-    <img class="logo-img" src="logo.png" alt="AMBI HOTEL">
+    <img class="logo-img" src="logo.png" alt="AMBI HOTEL" onclick="event.stopPropagation(); openLogoFullscreen();" style="cursor:zoom-in;">
     <div class="logo-text">AMBI<span>241</span></div>
   </a>
   <div class="header-right">
@@ -54808,4 +54808,12 @@ if(document.readyState === "loading"){
 setTimeout(_ambiBootClocks, 1500);
 setTimeout(_ambiBootClocks, 3000);
 })();
+</script>
+<div id="logoFullscreenModal" onclick="this.style.display='none'" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.92);z-index:99999;align-items:center;justify-content:center;cursor:zoom-out;">
+  <img src="logo.png" alt="AMBI HOTEL" style="max-width:90%;max-height:90%;border-radius:12px;box-shadow:0 0 40px rgba(255,45,149,0.4);">
+</div>
+<script>
+function openLogoFullscreen() {
+  document.getElementById('logoFullscreenModal').style.display = 'flex';
+}
 </script>
