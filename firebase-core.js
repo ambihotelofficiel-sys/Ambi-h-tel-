@@ -4,13 +4,13 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, on
 import { getStorage, ref, uploadBytes, uploadBytesResumable, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-storage.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCx3hD28Lb9EtUrawHbTnM-6vmXdgO1ABw",
-  authDomain: "ambi241.firebaseapp.com",
-  projectId: "ambi241",
-  storageBucket: "ambi241.firebasestorage.app",
-  messagingSenderId: "422590051382",
-  appId: "1:422590051382:web:fe05eaf701a6f704c2d497",
-  databaseURL: "https://ambi241-default-rtdb.europe-west1.firebasedatabase.app"
+  apiKey: "AIzaSyBY2pXZh6g4nxIFtQvanO_esoKI7ET2GUE",
+  authDomain: "ambihotel-officiel.firebaseapp.com",
+  projectId: "ambihotel-officiel",
+  storageBucket: "ambihotel-officiel.firebasestorage.app",
+  messagingSenderId: "618566705307",
+  appId: "1:618566705307:web:7fcb586897e41922fa263e",
+  measurementId: "G-28CMC0YGPG"
 };
 
 const app = initializeApp(firebaseConfig);
