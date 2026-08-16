@@ -174,7 +174,7 @@ function lsGetJSON(key,def){ try{ var v=lsGet(key); return v?JSON.parse(v):(def!
 function lsSetJSON(key,obj){ try{ lsSet(key,JSON.stringify(obj)); }catch(e){} }
 
 /* ══════════════════════════════════════════════════════════════════════
-   AUTO-FETCH PHOTOS — AMBI241 v3
+   AUTO-FETCH PHOTOS — AMBI HOTEL v3
    PRIORITÉ : photo_profile_approved > photo_interieur/exterieur >
               Google Places API (place_id) > Fallback SVG par type
    • Tous les établissements obtiennent une image, même sans place_id
@@ -1464,7 +1464,7 @@ function promoteToAdmin(uid, email, pseudo){
       targetEmail: email || "",
       icon:  "🔑",
       title: "Vous êtes maintenant Admin !",
-      msg:   "Le propriétaire d'AMBI241 vous a accordé les droits d'administration. Entrez le code PIN pour accéder au tableau de bord.",
+      msg:   "Le propriétaire d'AMBI HOTEL vous a accordé les droits d'administration. Entrez le code PIN pour accéder au tableau de bord.",
       key:   "promoted_admin",
       channel: "push",
       fromAdmin: true,
@@ -1504,7 +1504,7 @@ function revokeAdmin(uid, email, pseudo){
       targetEmail: email || "",
       icon:  "🔒",
       title: "Droits Admin révoqués",
-      msg:   "Vos droits d'administration sur AMBI241 ont été révoqués par le propriétaire.",
+      msg:   "Vos droits d'administration sur AMBI HOTEL ont été révoqués par le propriétaire.",
       key:   "revoked_admin",
       channel: "push",
       fromAdmin: true,
@@ -1521,7 +1521,7 @@ function transferOwnership(uid, email, pseudo){
   if(!isSuperAdminUser()){ showToast("Réservé au propriétaire de l'application"); return; }
   if(!confirm(
     "⚠️ TRANSFERT DE PROPRIÉTÉ\n\n" +
-    "Vous allez céder la propriété complète d'AMBI241 à :\n" +
+    "Vous allez céder la propriété complète d'AMBI HOTEL à :\n" +
     (pseudo||email) + "\n\n" +
     "Vous perdrez vos droits SuperAdmin.\n\n" +
     "Cette action est IRRÉVERSIBLE. Confirmer ?"
@@ -2147,10 +2147,10 @@ window.renderAdmClassement = renderAdmClassement;
 // ne sont PAS touchées.
 function resetCycleClassement(){
   var confirmMsg =
-    "⚡ NOUVEAU CYCLE AMBI241\n\n" +
+    "⚡ NOUVEAU CYCLE AMBI HOTEL\n\n" +
     "Ce reset va remettre à zéro :\n" +
     "  • Affluence (signalements de présence)\n" +
-    "  • Avis & notes AMBI241 (votes internes)\n" +
+    "  • Avis & notes AMBI HOTEL (votes internes)\n" +
     "  • Votes communautaires 👍 / 👎\n" +
     "  • Présences enregistrées\n" +
     "  • Cooldowns individuels\n\n" +
@@ -2193,7 +2193,7 @@ function resetCycleClassement(){
     if(window._livePresences) window._livePresences = {};
     if(window._liveVotes)     window._liveVotes     = {};
 
-    // 5. Remettre affluence=0 et avis AMBI241=0 sur chaque étab en mémoire
+    // 5. Remettre affluence=0 et avis AMBI HOTEL=0 sur chaque étab en mémoire
     //    MAIS conserver note officielle Google (_officialNote) si elle existe
     if(typeof etablissements !== "undefined" && etablissements){
       etablissements.forEach(function(e){
@@ -2202,7 +2202,7 @@ function resetCycleClassement(){
         if(!e._officialNote && e.note > 0 && e.place_id) {
           e._officialNote = e.note; // sauvegarder avant reset
         }
-        // Remettre avis AMBI241 à 0, garder _officialNote intacte
+        // Remettre avis AMBI HOTEL à 0, garder _officialNote intacte
         e.avis = 0;
         // Note : on garde e.note si c'est une note Google reconnue
         if(e._voteData) e._voteData = { pos:0, neg:0 };
@@ -2572,7 +2572,7 @@ function _processEtabData(firebaseData) {
   });
 
   if (_dupsFound.length > 0) {
-    console.warn('[AMBI241] 🚨 Doublons Firebase supprimés (' + _dupsFound.length + ') :',
+    console.warn('[AMBI HOTEL] 🚨 Doublons Firebase supprimés (' + _dupsFound.length + ') :',
       _dupsFound.map(function(d){
         return '❌ "' + d.removed.nom + '" id=' + d.removed.id + ' doc=' + d.removed._docId
              + ' → conservé id=' + d.kept.id + ' doc=' + d.kept._docId;
@@ -3231,7 +3231,7 @@ function renderUserPayDashboard(){
     /* Bouton renouveler si expiré ou proche */
     if(joursRestants===null||joursRestants<=14){
       html+='<div style="margin-bottom:1rem;">';
-      html+='<a href="https://wa.me/24174450924?text=Bonjour%20AMBI241%2C%20je%20souhaite%20renouveler%20mon%20abonnement%20pour%20'+encodeURIComponent(myEtab.nom)+'." target="_blank" ';
+      html+='<a href="https://wa.me/24174450924?text=Bonjour%20AMBI HOTEL%2C%20je%20souhaite%20renouveler%20mon%20abonnement%20pour%20'+encodeURIComponent(myEtab.nom)+'." target="_blank" ';
       html+='style="display:flex;align-items:center;justify-content:center;gap:0.5rem;width:100%;padding:0.8rem;border-radius:12px;background:linear-gradient(135deg,var(--pink),var(--purple));color:#fff;font-family:Syne,sans-serif;font-weight:800;font-size:0.88rem;text-decoration:none;box-shadow:0 4px 18px rgba(255,45,155,0.3);">';
       html+='🔄 Renouveler mon abonnement</a>';
       html+='</div>';
@@ -3271,7 +3271,7 @@ function renderUserPayDashboard(){
     html+='<div style="font-size:2rem;margin-bottom:0.6rem;">🏛️</div>';
     html+='<div style="font-family:Syne,sans-serif;font-weight:800;font-size:0.92rem;color:var(--amber);margin-bottom:0.4rem;">Inscrivez votre établissement</div>';
     html+='<div style="font-size:0.75rem;color:var(--muted);margin-bottom:1rem;line-height:1.6;">Aucun établissement n\'est lié à votre compte.<br>Contactez-nous pour procéder à l\'inscription.</div>';
-    html+='<a href="https://wa.me/24174450924?text=Bonjour%20AMBI241%2C%20je%20souhaite%20inscrire%20mon%20%C3%A9tablissement." target="_blank" ';
+    html+='<a href="https://wa.me/24174450924?text=Bonjour%20AMBI HOTEL%2C%20je%20souhaite%20inscrire%20mon%20%C3%A9tablissement." target="_blank" ';
     html+='style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.65rem 1.2rem;border-radius:12px;background:linear-gradient(135deg,var(--pink),var(--purple));color:#fff;font-family:Syne,sans-serif;font-weight:800;font-size:0.82rem;text-decoration:none;">';
     html+='💬 Inscrire mon établissement</a>';
     html+='</div>';
@@ -4568,8 +4568,8 @@ function sendForgotTel(){
 }
 
 function _sendForgotTelMailto(tel, pseudo, msg, btn){
-  var subject = encodeURIComponent("AMBI241 - Récupération de compte par téléphone");
-  var body    = encodeURIComponent("Demande de récupération de compte AMBI241\n\nPseudo : "+pseudo+"\nTéléphone : "+tel+"\n\nMerci de vérifier l'identité et d'envoyer un lien de réinitialisation.");
+  var subject = encodeURIComponent("AMBI HOTEL - Récupération de compte par téléphone");
+  var body    = encodeURIComponent("Demande de récupération de compte AMBI HOTEL\n\nPseudo : "+pseudo+"\nTéléphone : "+tel+"\n\nMerci de vérifier l'identité et d'envoyer un lien de réinitialisation.");
   btn.disabled=false; btn.innerHTML="&#128241; Envoyer ma demande";
   msg.style.color="var(--green)";
   msg.innerHTML="&#10003; Votre demande a été transmise.<br>"
@@ -5657,7 +5657,7 @@ function buildCompactRow(e, rank, extraClass){
 
   // Contact row compact
   var contact = e.contact ? e.contact.replace(/\s/g,"") : "";
-  var waUrl = contact ? "https://wa.me/"+(contact.replace(/\+/g,""))+"?text="+encodeURIComponent("Bonjour "+escHtml(e.nom)+" (via AMBI241)") : "";
+  var waUrl = contact ? "https://wa.me/"+(contact.replace(/\+/g,""))+"?text="+encodeURIComponent("Bonjour "+escHtml(e.nom)+" (via AMBI HOTEL)") : "";
   var telUrl = contact ? "tel:"+contact : "";
 
   // Nom vert clignotant si établissement proche (GPS) ou correspondant à la recherche
@@ -5772,7 +5772,7 @@ function buildCard(e,delay,compact,rank,extraClass){
       var evtM = Math.floor((evtTimeLeft % 3600000) / 60000);
       var evtExpireStr = evtH > 0 ? "Expire dans " + evtH + "h " + evtM + "min" : "Expire dans " + evtM + " min";
       var evtWaTel = (e.contact||"").replace(/\s/g,"").replace(/\+/g,"");
-      var evtWaMsg = encodeURIComponent("Bonjour " + (e.nom||"").replace(/'/g,"") + " (via AMBI241) — j'ai vu votre événement ce soir : " + (evt.texte||""));
+      var evtWaMsg = encodeURIComponent("Bonjour " + (e.nom||"").replace(/'/g,"") + " (via AMBI HOTEL) — j'ai vu votre événement ce soir : " + (evt.texte||""));
       var evtWaUrl = evtWaTel ? "https://wa.me/" + evtWaTel + "?text=" + evtWaMsg : "";
       eventFlashHtml = "<div class='card-event-flash'>"
         + "<div class='cef-live'></div>"
@@ -6343,9 +6343,9 @@ function buildCard(e,delay,compact,rank,extraClass){
       var tel = (e.contact||"").replace(/\s/g,"");
       var nom = (e.nom||"").replace(/'/g,"");
       var waNum = tel.replace(/\+/g,"");
-      var waMsg = encodeURIComponent("Bonjour "+nom+" (via AMBI241), je souhaite vous contacter.");
+      var waMsg = encodeURIComponent("Bonjour "+nom+" (via AMBI HOTEL), je souhaite vous contacter.");
       var waUrl = "https://wa.me/"+waNum+"?text="+waMsg;
-      var mailUrl = e.email ? "mailto:"+e.email : "mailto:ambi2412026@gmail.com?subject=Contact%20"+encodeURIComponent(nom)+"%20via%20AMBI241";
+      var mailUrl = e.email ? "mailto:"+e.email : "mailto:ambi2412026@gmail.com?subject=Contact%20"+encodeURIComponent(nom)+"%20via%20AMBI HOTEL";
       var html = "<div class='card-contact-row'>";
       // Téléphone
       if(tel){
@@ -7127,9 +7127,9 @@ function closePresenceModal(){ document.getElementById("presenceOverlay").classL
 function confirmPresenceWhatsApp(){
   if(!_presenceEid) return;
   var e = etablissements.find(function(x){ return x.id===_presenceEid; })||{nom:"",quartier:""};
-  var pseudo = window.currentUserPseudo || "Visiteur AMBI241";
+  var pseudo = window.currentUserPseudo || "Visiteur AMBI HOTEL";
   var mapsUrl = e.maps_url || ("https://maps.google.com/?q="+encodeURIComponent((e.nom||"")+" "+(e.quartier||"")+" Libreville"));
-  var msg = encodeURIComponent("✅ Je suis actuellement à *"+e.nom+"* ("+e.quartier+") — AMBI241\n📍 "+mapsUrl+"\n👤 "+pseudo);
+  var msg = encodeURIComponent("✅ Je suis actuellement à *"+e.nom+"* ("+e.quartier+") — AMBI HOTEL\n📍 "+mapsUrl+"\n👤 "+pseudo);
   registerPresence(_presenceEid);
   document.getElementById("presenceConfirmMsg").style.display = "block";
   document.getElementById("presenceConfirmMsg").innerHTML = "✅ Présence enregistrée ! Ouverture WhatsApp...";
@@ -8535,10 +8535,10 @@ window._syncProfilSection = _syncProfilSection;
     var mois    = ['janv.','févr.','mars','avr.','mai','juin','juil.','août','sept.','oct.','nov.','déc.'];
 
     /* Vue — Nom */
-    _setHtml('pv-chauffeur-name', _esc(pseudo)+' <span class="verified-icon vi-gold" title="Chauffeur certifié AMBI241">✓</span>');
+    _setHtml('pv-chauffeur-name', _esc(pseudo)+' <span class="verified-icon vi-gold" title="Chauffeur certifié AMBI HOTEL">✓</span>');
 
     /* Vue — Handle */
-    var handleParts = ['Chauffeur AMBI241', zone];
+    var handleParts = ['Chauffeur AMBI HOTEL', zone];
     if(driver && driver.createdAt){ try{ var dt=new Date(driver.createdAt); handleParts.push('Depuis '+mois[dt.getMonth()]+' '+dt.getFullYear()); }catch(e){} }
     _setHtml('pv-chauffeur-handle', handleParts.map(function(p){ return '<span>'+_esc(p)+'</span>'; }).join('<span class="handle-sep">·</span>'));
 
@@ -8771,7 +8771,7 @@ window._syncProfilSection = _syncProfilSection;
   }, 800);
 
   window._patchProfilCoherence = _patchAll;
-  console.log('[AMBI241] ✅ Patch Profil v2 — toutes vues synchronisées (membre/chauffeur/étab)');
+  console.log('[AMBI HOTEL] ✅ Patch Profil v2 — toutes vues synchronisées (membre/chauffeur/étab)');
 })();
 
 function navHandleProfil(btn){
@@ -9083,7 +9083,7 @@ window.openFicheEtab = function(id){
   if(e.quartier)    h += '<div class="fiche-info-line"><span class="fiche-info-icon">📍</span><span class="fiche-info-val">'+escHtml(e.quartier)+'</span></div>';
   if(e.contact){
     var waNum = e.contact.replace(/\s/g,'').replace(/\+/g,'');
-    var waMsg = encodeURIComponent('Bonjour '+escHtml(e.nom)+' (via AMBI241)');
+    var waMsg = encodeURIComponent('Bonjour '+escHtml(e.nom)+' (via AMBI HOTEL)');
     h += '<div class="fiche-info-line"><span class="fiche-info-icon">📞</span><span class="fiche-info-val"><a href="tel:'+e.contact+'">'+escHtml(e.contact)+'</a></span></div>';
     h += '<div class="fiche-info-line"><span class="fiche-info-icon">💬</span><span class="fiche-info-val"><a href="https://wa.me/'+waNum+'?text='+waMsg+'" target="_blank">WhatsApp</a></span></div>';
   }
@@ -9121,7 +9121,7 @@ window.openFicheEtab = function(id){
 
   /* Boutons d'action */
   var contact = e.contact||'';
-  var waUrl   = contact ? 'https://wa.me/'+(contact.replace(/\+/g,'').replace(/\s/g,''))+'?text='+encodeURIComponent('Bonjour '+e.nom+' (via AMBI241)') : '';
+  var waUrl   = contact ? 'https://wa.me/'+(contact.replace(/\+/g,'').replace(/\s/g,''))+'?text='+encodeURIComponent('Bonjour '+e.nom+' (via AMBI HOTEL)') : '';
   var telUrl  = contact ? 'tel:'+contact : '';
   var mapsUrl = e.maps_url || ('https://maps.google.com/?q='+encodeURIComponent((e.nom||'')+' '+(e.quartier||'')+' Libreville Gabon'));
   h += '<div class="fiche-section"><div class="fiche-section-title">Contacts</div>';
@@ -10496,7 +10496,7 @@ function notifyEtablissementRenewal(etab){
   var status = getSubscriptionStatus(etab);
   var daysLeft = getDaysLeft(etab);
   if(status === "expire"){
-    pushNotif({targetRole:"etablissement",key:"my_sub_expire",icon:"🔴",title:"Votre abonnement est expiré !",msg:"Votre fiche n'est plus visible. Renouvelez votre abonnement pour rester sur AMBI241.",channel:"push"});
+    pushNotif({targetRole:"etablissement",key:"my_sub_expire",icon:"🔴",title:"Votre abonnement est expiré !",msg:"Votre fiche n'est plus visible. Renouvelez votre abonnement pour rester sur AMBI HOTEL.",channel:"push"});
   } else if(status === "critique"){
     pushNotif({targetRole:"etablissement",key:"my_sub_critique",icon:"⚠️",title:"Abonnement expire dans "+daysLeft+"j !",msg:"Procédez au renouvellement avant le "+getEcheanceStr(etab)+" pour maintenir votre visibilité.",channel:"push"});
   } else if(status === "alerte"){
@@ -10709,7 +10709,7 @@ function submitEtablissement(event){
     msg.innerHTML="✅ Demande envoyée ! Nous reviendrons vers vous dans les 24h.<br><small style='color:var(--muted)'>Contactez-nous : ambi2412026@gmail.com</small>";
     // Notification WhatsApp admin
     var waMsg = encodeURIComponent(
-      "🏠 NOUVELLE DEMANDE AMBI241\n\n"+
+      "🏠 NOUVELLE DEMANDE AMBI HOTEL\n\n"+
       "📌 Établissement : "+nom+"\n"+
       "🎭 Type : "+type+"\n"+
       "📍 Quartier : "+quartier+"\n"+
@@ -10720,7 +10720,7 @@ function submitEtablissement(event){
       "🔑 Transaction : "+transaction+"\n"+
       "📅 Abonnement : "+subPlan.label+" — "+subPlan.montant.toLocaleString("fr-FR")+" XAF ("+subPlan.dureeLabel+")\n"+
       (lat?"📡 GPS : "+lat+","+lng+"\n":"")+
-      "\nÀ valider dans le tableau de bord AMBI241."
+      "\nÀ valider dans le tableau de bord AMBI HOTEL."
     );
     setTimeout(function(){ window.open("https://wa.me/24174450924?text="+waMsg,"_blank"); },800);
     // Reset form après 3s
@@ -10739,7 +10739,7 @@ function submitEtablissement(event){
     msg.textContent="Erreur d'envoi. Contactez-nous sur WhatsApp ou email. ("+errMsg+")";
     // Fallback WhatsApp direct
     var waMsg = encodeURIComponent(
-      "🏠 DEMANDE INSCRIPTION AMBI241\n"+
+      "🏠 DEMANDE INSCRIPTION AMBI HOTEL\n"+
       "Établissement : "+nom+" ("+type+")\n"+
       "Quartier : "+quartier+"\n"+
       "Gérant : "+gerant+" - "+tel+"\n"+
@@ -11297,18 +11297,18 @@ window.loadStatsCommunautaires = function(etabId, callback){
 
 // ── MODALES LÉGALES (CGU / Confidentialité) ──────────────────
 var CGU_TEXT = "<div class='modal-title' style='margin-bottom:0.6rem'>&#128275; Conditions Générales d'Utilisation</div><div class='modal-sub' style='margin-bottom:1rem'>Dernière mise à jour : Avril 2026</div><div style='font-size:0.8rem;color:var(--muted);padding:0.8rem;border-left:2px solid var(--pink);margin-bottom:1rem;'><strong style='color:var(--text)'>Responsable :</strong> M. KOZANGUE ESSONO PATRICK BERTIN</div>"
-  + "<p style='font-size:0.82rem;color:var(--muted);line-height:1.7;margin-bottom:0.8rem'><strong style='color:var(--text)'>1. Objet</strong><br>AMBI241 est un annuaire d'ambiance en temps réel des bars, restaurants et discotheques de Libreville, Gabon. L'utilisation de l'application implique l'acceptation des présentes conditions.</p>"
-  + "<p style='font-size:0.82rem;color:var(--muted);line-height:1.7;margin-bottom:0.8rem'><strong style='color:var(--text)'>2. Inscription établissement</strong><br>L'inscription d'un établissement est payante (5 000 XAF/mois). La validation est effectuée par l'équipe AMBI241 après vérification du paiement sous 24h. <strong style='color:var(--amber)'>Nom officiel de l'opérateur : KOZANGUE ESSONO PATRICK BERTIN</strong> - Tous les paiements et transactions financières doivent être validés par ce nom officiel.</p>"
+  + "<p style='font-size:0.82rem;color:var(--muted);line-height:1.7;margin-bottom:0.8rem'><strong style='color:var(--text)'>1. Objet</strong><br>AMBI HOTEL est un annuaire d'ambiance en temps réel des bars, restaurants et discotheques de Libreville, Gabon. L'utilisation de l'application implique l'acceptation des présentes conditions.</p>"
+  + "<p style='font-size:0.82rem;color:var(--muted);line-height:1.7;margin-bottom:0.8rem'><strong style='color:var(--text)'>2. Inscription établissement</strong><br>L'inscription d'un établissement est payante (5 000 XAF/mois). La validation est effectuée par l'équipe AMBI HOTEL après vérification du paiement sous 24h. <strong style='color:var(--amber)'>Nom officiel de l'opérateur : KOZANGUE ESSONO PATRICK BERTIN</strong> - Tous les paiements et transactions financières doivent être validés par ce nom officiel.</p>"
   + "<p style='font-size:0.82rem;color:var(--muted);line-height:1.7;margin-bottom:0.8rem'><strong style='color:var(--text)'>3. Compte utilisateur</strong><br>L'accès à la galerie membres requiert la création d'un compte. Vous êtes responsable de la confidentialité de vos identifiants.</p>"
-  + "<p style='font-size:0.82rem;color:var(--muted);line-height:1.7;margin-bottom:0.8rem'><strong style='color:var(--text)'>4. Contenu</strong><br>AMBI241 se réserve le droit de refuser ou supprimer tout contenu inapproprié. Les photos doivent être conformes aux bonnes mœurs et à la réglementation en vigueur.</p>"
-  + "<p style='font-size:0.82rem;color:var(--muted);line-height:1.7;margin-bottom:0.8rem'><strong style='color:var(--text)'>5. Responsabilité</strong><br>Les informations d'ambiance sont fournies à titre indicatif. AMBI241 ne peut être tenu responsable d'éventuelles inexactitudes.</p>"
-  + "<p style='font-size:0.82rem;color:var(--muted);line-height:1.7;margin-bottom:0.8rem'><strong style='color:var(--text)'>6. Propriété et Création</strong><br>AMBI241 a été créée par la PME informatique <strong style='color:var(--cyan)'>PC-INFORMATIQUE</strong>, sous la présidence de <strong style='color:var(--pink)'>KOZANGUE ESSONO PATRICK BERTIN</strong>.</p>"
+  + "<p style='font-size:0.82rem;color:var(--muted);line-height:1.7;margin-bottom:0.8rem'><strong style='color:var(--text)'>4. Contenu</strong><br>AMBI HOTEL se réserve le droit de refuser ou supprimer tout contenu inapproprié. Les photos doivent être conformes aux bonnes mœurs et à la réglementation en vigueur.</p>"
+  + "<p style='font-size:0.82rem;color:var(--muted);line-height:1.7;margin-bottom:0.8rem'><strong style='color:var(--text)'>5. Responsabilité</strong><br>Les informations d'ambiance sont fournies à titre indicatif. AMBI HOTEL ne peut être tenu responsable d'éventuelles inexactitudes.</p>"
+  + "<p style='font-size:0.82rem;color:var(--muted);line-height:1.7;margin-bottom:0.8rem'><strong style='color:var(--text)'>6. Propriété et Création</strong><br>AMBI HOTEL a été créée par la PME informatique <strong style='color:var(--cyan)'>PC-INFORMATIQUE</strong>, sous la présidence de <strong style='color:var(--pink)'>KOZANGUE ESSONO PATRICK BERTIN</strong>.</p>"
   + "<p style='font-size:0.82rem;color:var(--muted);line-height:1.7'><strong style='color:var(--text)'>7. Contact</strong><br>Pour toute question : <a href='mailto:ambi2412026@gmail.com' style='color:var(--cyan)'>ambi2412026@gmail.com</a></p>";
 
 var CONF_TEXT = "<div class='modal-title' style='margin-bottom:0.6rem'>&#128274; Politique de Confidentialité</div><div class='modal-sub' style='margin-bottom:1rem'>Dernière mise à jour : Avril 2026</div><div style='font-size:0.8rem;color:var(--muted);padding:0.8rem;border-left:2px solid var(--cyan);margin-bottom:1rem;'><strong style='color:var(--text)'>Responsable :</strong> M. KOZANGUE ESSONO PATRICK BERTIN</div>"
-  + "<p style='font-size:0.82rem;color:var(--muted);line-height:1.7;margin-bottom:0.8rem'><strong style='color:var(--text)'>Opérateur et Responsabilité</strong><br>AMBI241 est opérée par <strong style='color:var(--pink)'>KOZANGUE ESSONO PATRICK BERTIN</strong>, Président et fondateur de la PME informatique <strong style='color:var(--cyan)'>PC-INFORMATIQUE</strong>. Tout paiement et transaction financière doit être validé au nom officiel de l'opérateur.</p>"
+  + "<p style='font-size:0.82rem;color:var(--muted);line-height:1.7;margin-bottom:0.8rem'><strong style='color:var(--text)'>Opérateur et Responsabilité</strong><br>AMBI HOTEL est opérée par <strong style='color:var(--pink)'>KOZANGUE ESSONO PATRICK BERTIN</strong>, Président et fondateur de la PME informatique <strong style='color:var(--cyan)'>PC-INFORMATIQUE</strong>. Tout paiement et transaction financière doit être validé au nom officiel de l'opérateur.</p>"
   + "<p style='font-size:0.82rem;color:var(--muted);line-height:1.7;margin-bottom:0.8rem'><strong style='color:var(--text)'>Données collectées</strong><br>Lors de l'inscription, nous collectons : pseudo, prénom, nom, email, téléphone et date de naissance. Ces données sont stockées de manière sécurisée via Firebase (Google).</p>"
-  + "<p style='font-size:0.82rem;color:var(--muted);line-height:1.7;margin-bottom:0.8rem'><strong style='color:var(--text)'>Utilisation des données</strong><br>Vos données sont utilisées uniquement pour la gestion de votre compte AMBI241 et ne sont jamais revendues à des tiers.</p>"
+  + "<p style='font-size:0.82rem;color:var(--muted);line-height:1.7;margin-bottom:0.8rem'><strong style='color:var(--text)'>Utilisation des données</strong><br>Vos données sont utilisées uniquement pour la gestion de votre compte AMBI HOTEL et ne sont jamais revendues à des tiers.</p>"
   + "<p style='font-size:0.82rem;color:var(--muted);line-height:1.7;margin-bottom:0.8rem'><strong style='color:var(--text)'>Photos</strong><br>Les photos de galerie (slot soirée) sont stockées sur Firebase Firestore/Storage et synchronisées sur tous vos appareils connectés. Un cache local (localStorage) est conservé pour un chargement rapide hors ligne. Les photos permanentes des établissements sont hébergées sur Firebase Storage.</p>"
   + "<p style='font-size:0.82rem;color:var(--muted);line-height:1.7;margin-bottom:0.8rem'><strong style='color:var(--text)'>Vos droits</strong><br>Vous pouvez demander la suppression de votre compte et de vos données à tout moment en nous contactant par email.</p>"
   + "<p style='font-size:0.82rem;color:var(--muted);line-height:1.7'><strong style='color:var(--text)'>Contact DPO</strong><br><a href='mailto:ambi2412026@gmail.com' style='color:var(--cyan)'>ambi2412026@gmail.com</a> ou <strong>KOZANGUE ESSONO PATRICK BERTIN</strong> - Président PC-INFORMATIQUE</p>";
@@ -11349,7 +11349,7 @@ window.closeLegalModal = closeLegalModal;
 })();
 
 // ══════════════════════════════════════════════════════════════
-// ══ SYSTÈME DE NOTIFICATIONS CIBLÉES AMBI241 v2             ══
+// ══ SYSTÈME DE NOTIFICATIONS CIBLÉES AMBI HOTEL v2             ══
 // ══════════════════════════════════════════════════════════════
 // Chaque utilisateur ne reçoit QUE ses notifications.
 // L'admin voit TOUT et peut modérer/supprimer n'importe quelle notif.
@@ -11393,11 +11393,11 @@ var ROLE_CHANNELS = {
 // ── Événements par rôle — STRICTEMENT CIBLÉS ─────────────────
 var ROLE_EVENTS = {
   visiteur: [
-    { key:"new_spot",     label:"Nouveau lieu ouvert",     icon:"🏠", desc:"Un bar/resto rejoint AMBI241" },
+    { key:"new_spot",     label:"Nouveau lieu ouvert",     icon:"🏠", desc:"Un bar/resto rejoint AMBI HOTEL" },
     { key:"top_ambiance", label:"Lieu très bondé ce soir", icon:"🔥", desc:"Affluence > 80%" }
   ],
   membre: [
-    { key:"new_spot",         label:"Nouveau lieu ouvert",      icon:"🏠", desc:"Un bar/resto rejoint AMBI241" },
+    { key:"new_spot",         label:"Nouveau lieu ouvert",      icon:"🏠", desc:"Un bar/resto rejoint AMBI HOTEL" },
     { key:"top_ambiance",     label:"Lieu très bondé ce soir",  icon:"🔥", desc:"Affluence > 80%" },
     { key:"galerie_new_photo",label:"Nouvelle photo en galerie", icon:"📸", desc:"Un lieu a ajouté une photo" },
     { key:"statut_change",    label:"Changement d'ambiance",    icon:"🎵", desc:"Statut d'un de vos lieux favoris" },
@@ -11567,7 +11567,7 @@ function pushNotif(opts){
   // Push navigateur
   if((opts.channel==="push"||!opts.channel) && typeof Notification!=="undefined" && Notification.permission==="granted"){
     try{
-      new Notification("AMBI241 — "+opts.title,{
+      new Notification("AMBI HOTEL — "+opts.title,{
         body:opts.msg, icon:"/ambi241/favicon.ico", tag:opts.key
       });
     }catch(ex){}
@@ -11690,10 +11690,10 @@ var _urgentTemplates = {
 /* Templates standards */
 var _notifTemplates = {
   soiree:     { icon:"🎉", type:"event",  title:"🔥 Soirée exceptionnelle ce soir !",  msg:"Des établissements organisent des événements spéciaux ce soir. Découvrez l'ambiance en temps réel !" },
-  promo:      { icon:"🎁", type:"promo",  title:"🎁 Offre exclusive pour vous !",       msg:"Profitez d'offres spéciales dans les établissements partenaires AMBI241 ce week-end." },
+  promo:      { icon:"🎁", type:"promo",  title:"🎁 Offre exclusive pour vous !",       msg:"Profitez d'offres spéciales dans les établissements partenaires AMBI HOTEL ce week-end." },
   classement: { icon:"🏆", type:"info",   title:"🏆 Nouveau classement disponible !",  msg:"Le classement hebdomadaire des établissements vient d'être mis à jour. Découvrez le top 10 !" },
-  nouveaute:  { icon:"✨", type:"update", title:"✨ Nouvelle fonctionnalité AMBI241",  msg:"Une nouvelle mise à jour est disponible. Découvrez les nouvelles fonctionnalités de l'application !" },
-  bienvenue:  { icon:"👋", type:"info",   title:"👋 Bienvenue sur AMBI241 !",          msg:"Trouvez l'ambiance des meilleurs bars et restaurants de Libreville en temps réel. Bonne découverte !" }
+  nouveaute:  { icon:"✨", type:"update", title:"✨ Nouvelle fonctionnalité AMBI HOTEL",  msg:"Une nouvelle mise à jour est disponible. Découvrez les nouvelles fonctionnalités de l'application !" },
+  bienvenue:  { icon:"👋", type:"info",   title:"👋 Bienvenue sur AMBI HOTEL !",          msg:"Trouvez l'ambiance des meilleurs bars et restaurants de Libreville en temps réel. Bonne découverte !" }
 };
 
 function admApplyUrgentTemplate(key){
@@ -11818,7 +11818,7 @@ function admClearAllNotifs(){
 }
 window.admClearAllNotifs = admClearAllNotifs;
 
-// ── Toast riche AMBI241 ───────────────────────────────────────
+// ── Toast riche AMBI HOTEL ───────────────────────────────────────
 var _notifToastTimer;
 // notifMeta : mapping type → {icon,color,label}
 var _ambiNotifMeta = {
@@ -11857,7 +11857,7 @@ function showNotifToast(msg, notif){
     var titleEl=document.getElementById("notifToastTitle");
     var msgEl=document.getElementById("notifToastMsg");
     if(iconEl){ iconEl.textContent = notif.icon||meta.icon; iconEl.style.boxShadow="0 0 12px "+meta.color+"88"; }
-    if(labelEl){ labelEl.textContent = "AMBI241 · "+meta.label; labelEl.style.color=meta.color; }
+    if(labelEl){ labelEl.textContent = "AMBI HOTEL · "+meta.label; labelEl.style.color=meta.color; }
     if(titleEl) titleEl.textContent = notif.title||"";
     if(msgEl)   msgEl.textContent   = notif.msg||"";
     t.style.borderColor = meta.color+"44";
@@ -11868,7 +11868,7 @@ function showNotifToast(msg, notif){
     var labelEl2=document.getElementById("notifToastLabel");
     if(titleEl2) titleEl2.textContent = msg||"";
     if(msgEl2)   msgEl2.textContent   = "";
-    if(labelEl2) labelEl2.textContent = "AMBI241";
+    if(labelEl2) labelEl2.textContent = "AMBI HOTEL";
   }
   t.classList.add("show");
   clearTimeout(_notifToastTimer);
@@ -12073,7 +12073,7 @@ var _nobRoleConfig = {
       { key:'forum_msg',      label:'Messages du forum',         icon:'💬', desc:'Réponses et mentions dans les discussions', on:true  },
       { key:'friend_request', label:'Demandes d\'amis',          icon:'👥', desc:'Quand un membre veut vous ajouter',         on:true  },
       { key:'top_ambiance',   label:'Ambiances en direct',       icon:'🔥', desc:'Lieux très animés ce soir près de vous',   on:true  },
-      { key:'new_spot',       label:'Nouveau lieu ouvert',       icon:'🏠', desc:'Un bar/resto rejoint AMBI241',             on:false },
+      { key:'new_spot',       label:'Nouveau lieu ouvert',       icon:'🏠', desc:'Un bar/resto rejoint AMBI HOTEL',             on:false },
       { key:'promo',          label:'Soirées & événements',      icon:'🎉', desc:'Promos et soirées spéciales annoncées',    on:false },
       { key:'statut_change',  label:'Changement d\'ambiance',    icon:'🎵', desc:'Mise à jour d\'un de vos favoris',         on:false }
     ]
@@ -12125,7 +12125,7 @@ var _nobRoleConfig = {
     pillColor: 'rgba(255,255,255,0.5)',
     subtitle: 'Créez un compte pour accéder à toutes les fonctionnalités de notification.',
     events  : [
-      { key:'new_spot',     label:'Nouveau lieu ouvert',     icon:'🏠', desc:'Un bar/resto rejoint AMBI241', on:true },
+      { key:'new_spot',     label:'Nouveau lieu ouvert',     icon:'🏠', desc:'Un bar/resto rejoint AMBI HOTEL', on:true },
       { key:'top_ambiance', label:'Ambiances en direct',     icon:'🔥', desc:'Lieux très animés ce soir',   on:true }
     ]
   }
@@ -12245,7 +12245,7 @@ function ambiOnboardConfirm(){
             chauffeur   : { icon:'🚖', title:'Prêt à recevoir des courses !',         msg:'Les nouvelles demandes vous seront envoyées en temps réel.' },
             admin       : { icon:'🔑', title:'Surveillance système activée',           msg:'Inscriptions, paiements et alertes arriveront ici.' },
             visiteur    : { icon:'✨', title:'Notifications activées',                 msg:'Restez informé des nouveaux lieux et ambiances.' }
-          }[role] || { icon:'🔔', title:'Notifications activées', msg:'Bienvenue sur AMBI241 !' };
+          }[role] || { icon:'🔔', title:'Notifications activées', msg:'Bienvenue sur AMBI HOTEL !' };
 
           pushNotif({
             targetRole : 'all',
@@ -12323,7 +12323,7 @@ function clearAllNotifs(){
 }
 
 // ══════════════════════════════════════════════════════════════
-// ══  SYSTÈME APPEL ENTRANT AMBI241                           ══
+// ══  SYSTÈME APPEL ENTRANT AMBI HOTEL                           ══
 // ══════════════════════════════════════════════════════════════
 var _ambiCallWaveTimer=null;
 var _ambiCallWaveRing=0;
@@ -12359,7 +12359,7 @@ function ambiDeclineCall(){
   window._ambiCurrentCaller=null;
   pushNotif({targetRole:"all",key:"call_missed",icon:"📞",
     title:"Appel manqué"+(window._ambiCurrentCaller?" — "+window._ambiCurrentCaller.name:""),
-    msg:"Vous avez manqué un appel vocal AMBI241.",channel:"push"});
+    msg:"Vous avez manqué un appel vocal AMBI HOTEL.",channel:"push"});
 }
 window.ambiDeclineCall=ambiDeclineCall;
 
@@ -12374,8 +12374,8 @@ window.ambiAcceptCall=ambiAcceptCall;
 function triggerWelcomeNotif(){
   var role=getUserRole();
   var msgs={
-    visiteur:{title:"Bienvenue sur AMBI241 !",msg:"Découvrez l'ambiance des bars et restos de Libreville en temps réel."},
-    membre:{title:"Bon retour, membre AMBI241 !",msg:"Vos lieux favoris sont mis à jour en direct. Bonne soirée !"},
+    visiteur:{title:"Bienvenue sur AMBI HOTEL !",msg:"Découvrez l'ambiance des bars et restos de Libreville en temps réel."},
+    membre:{title:"Bon retour, membre AMBI HOTEL !",msg:"Vos lieux favoris sont mis à jour en direct. Bonne soirée !"},
     etablissement:{title:"Espace établissement actif",msg:"Mettez à jour votre ambiance pour attirer plus de clients ce soir."},
     admin:{title:"Mode Admin activé",msg:"Tableau de bord complet disponible. Paiements et membres à vérifier."}
   };
@@ -12411,7 +12411,7 @@ function checkAutoNotifs(){
     var myEtab=etablissements.find(function(e){return(e.email||"").toLowerCase().trim()===(currentUserEmail||"").toLowerCase().trim();});
     if(myEtab){
       if(myEtab.paiement&&myEtab.paiement.indexOf("Actif")!==-1){
-        pushNotif({targetRole:"etablissement",key:"paiement_confirmed",icon:"✅",title:"Abonnement actif — "+myEtab.nom,msg:"Votre fiche est visible par tous les utilisateurs AMBI241.",channel:"push"});
+        pushNotif({targetRole:"etablissement",key:"paiement_confirmed",icon:"✅",title:"Abonnement actif — "+myEtab.nom,msg:"Votre fiche est visible par tous les utilisateurs AMBI HOTEL.",channel:"push"});
         // Vérifier renouvellement
         notifyEtablissementRenewal(myEtab);
       }
@@ -12435,7 +12435,7 @@ function checkAutoNotifs(){
 
 function initNotifications(){
   renderNotifBadge();
-  // triggerWelcomeNotif() supprimé — bannière AMBI241·INFO désactivée
+  // triggerWelcomeNotif() supprimé — bannière AMBI HOTEL·INFO désactivée
   setTimeout(function loop(){checkAutoNotifs();setTimeout(loop,120000);},5000);
 }
 
@@ -12485,7 +12485,7 @@ function openAdminDashboard(btn){
       +'<div style="background:var(--surface);border:1.5px solid rgba(255,215,0,0.4);border-radius:22px;padding:2rem 1.5rem;width:min(360px,95%);text-align:center;animation:popIn 0.3s cubic-bezier(0.34,1.56,0.64,1);">'
       +'<div style="font-size:2.5rem;margin-bottom:0.6rem;">⚙️</div>'
       +'<div style="font-family:Syne,sans-serif;font-weight:800;font-size:1.1rem;color:var(--amber);margin-bottom:0.4rem;">Tableau de Bord Admin</div>'
-      +'<div style="font-size:0.82rem;color:var(--muted);line-height:1.6;margin-bottom:1rem;">Cet espace est réservé aux <strong style="color:var(--text)">administrateurs AMBI241</strong>.<br>Connectez-vous avec un compte admin pour y accéder.</div>'
+      +'<div style="font-size:0.82rem;color:var(--muted);line-height:1.6;margin-bottom:1rem;">Cet espace est réservé aux <strong style="color:var(--text)">administrateurs AMBI HOTEL</strong>.<br>Connectez-vous avec un compte admin pour y accéder.</div>'
       +'<button onclick="document.getElementById(\'_adminInfoOverlay\').remove();document.querySelectorAll(\'.nav-item\').forEach(function(b){b.classList.remove(\'active\')});document.querySelectorAll(\'.nav-item\')[0].classList.add(\'active\');document.getElementById(\'authOverlay\').classList.add(\'show\');" style="width:100%;padding:0.75rem;border-radius:12px;border:none;background:linear-gradient(135deg,var(--amber),var(--pink));color:#000;font-family:Syne,sans-serif;font-weight:800;font-size:0.9rem;cursor:pointer;margin-bottom:0.5rem;">🔑 Se connecter</button>'
       +'<button onclick="document.getElementById(\'_adminInfoOverlay\').remove();document.querySelectorAll(\'.nav-item\').forEach(function(b){b.classList.remove(\'active\')});document.querySelectorAll(\'.nav-item\')[0].classList.add(\'active\');" style="width:100%;padding:0.6rem;border-radius:12px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.05);color:var(--muted);font-family:DM Sans,sans-serif;font-size:0.85rem;cursor:pointer;">Fermer</button>'
       +'</div></div>';
@@ -14557,7 +14557,7 @@ var _AMBI241_DEFAULT_LOGO = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABAAAA
 var _appIdentityCache = {
   logoUrl: _AMBI241_DEFAULT_LOGO,
   splashLogoUrl: _AMBI241_DEFAULT_LOGO,
-  appName: "AMBI241"
+  appName: "AMBI HOTEL"
 };
 
 /** Charge l'identité de l'app depuis Firestore */
@@ -14583,7 +14583,7 @@ function loadAppIdentity() {
 function _applyAppIdentity() {
   var logo = _appIdentityCache.logoUrl || "";
   var splashLogo = _appIdentityCache.splashLogoUrl || logo;
-  var appName = _appIdentityCache.appName || "AMBI241";
+  var appName = _appIdentityCache.appName || "AMBI HOTEL";
 
   /* ── Logo header principal ── */
   var headerImgs = document.querySelectorAll(".logo-img, #appLogoImg, [data-app-logo]");
@@ -14706,7 +14706,7 @@ function _uploadAppLogo(file, slot) {
 function renderAdmLogoPanel() {
   var logoUrl = _appIdentityCache.logoUrl || "";
   var splashUrl = _appIdentityCache.splashLogoUrl || logoUrl;
-  var appName = _appIdentityCache.appName || "AMBI241";
+  var appName = _appIdentityCache.appName || "AMBI HOTEL";
 
   var h = "";
   h += "<div style='background:linear-gradient(135deg,rgba(157,132,255,0.08),rgba(0,229,255,0.04));border:1px solid rgba(157,132,255,0.3);border-radius:14px;padding:1rem;margin-bottom:1rem;'>";
@@ -14717,7 +14717,7 @@ function renderAdmLogoPanel() {
   h += "<div style='margin-bottom:1rem;'>";
   h += "<label style='font-size:0.72rem;color:var(--muted);display:block;margin-bottom:0.3rem;font-weight:700;'>📝 Nom de l'application</label>";
   h += "<div style='display:flex;gap:0.5rem;'>";
-  h += "<input id='admAppNameInput' type='text' value='" + escHtml(appName) + "' placeholder='AMBI241' style='flex:1;background:var(--surface2);border:1px solid rgba(157,132,255,0.25);border-radius:8px;color:var(--text);padding:0.5rem 0.7rem;font-size:0.82rem;'>";
+  h += "<input id='admAppNameInput' type='text' value='" + escHtml(appName) + "' placeholder='AMBI HOTEL' style='flex:1;background:var(--surface2);border:1px solid rgba(157,132,255,0.25);border-radius:8px;color:var(--text);padding:0.5rem 0.7rem;font-size:0.82rem;'>";
   h += "<button onclick='saveAppIdentity({appName:document.getElementById(\"admAppNameInput\").value})' style='padding:0.5rem 0.9rem;border-radius:8px;border:none;background:linear-gradient(135deg,#9D84FF,var(--purple));color:#fff;font-family:Syne,sans-serif;font-weight:800;font-size:0.78rem;cursor:pointer;white-space:nowrap;'>Sauver</button>";
   h += "</div></div>";
 
@@ -15226,7 +15226,7 @@ function envoyerReservation() {
   var fb  = document.getElementById('reservFeedback');
   btn.disabled = true; btn.textContent = 'Envoi en cours...';
   if (!window.db || !window.fbAddDoc || !window.fbCollection) {
-    var waMsg = 'Reservation VIP AMBI241 - Etablissement: ' + _currentReservEtab.nom + ' | Nom: ' + nom + ' | Tel: ' + tel + ' | Pers: ' + nb + (msg ? ' | Note: ' + msg : '');
+    var waMsg = 'Reservation VIP AMBI HOTEL - Etablissement: ' + _currentReservEtab.nom + ' | Nom: ' + nom + ' | Tel: ' + tel + ' | Pers: ' + nb + (msg ? ' | Note: ' + msg : '');
     window.open('https://wa.me/24174450924?text=' + encodeURIComponent(waMsg), '_blank');
     fb.style.display = 'block'; fb.style.color = 'var(--green)';
     fb.textContent = 'Demande envoyee ! Vous serez contacte au ' + tel;
@@ -15566,7 +15566,7 @@ function assignEtablissementToUser(etabId, userEmail, userName){
         targetEmail: userEmail,
         icon: '🏠',
         title: 'Établissement assigné !',
-        msg: 'Vous gérez maintenant "'+etab.nom+'" sur AMBI241.',
+        msg: 'Vous gérez maintenant "'+etab.nom+'" sur AMBI HOTEL.',
         ts: Date.now(),
         unread: true
       }).catch(function(){});
@@ -15730,7 +15730,7 @@ function openUserProfile(userData){
     +avatarHtml
     +'<div style="flex:1;min-width:0;padding-bottom:0.15rem;">'
     +'<div style="font-family:Syne,sans-serif;font-weight:800;font-size:1.05rem;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+escHtml(pseudo)+'</div>'
-    +'<div style="font-size:0.65rem;color:var(--muted);margin-top:0.05rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+(iAmSuper?escHtml(email||"—"):'Membre AMBI241')+'</div>'
+    +'<div style="font-size:0.65rem;color:var(--muted);margin-top:0.05rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+(iAmSuper?escHtml(email||"—"):'Membre AMBI HOTEL')+'</div>'
     +badgesHtml
     +'</div>'
     +'</div>'
