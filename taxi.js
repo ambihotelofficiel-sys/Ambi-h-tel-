@@ -313,7 +313,7 @@ function openWhatsApp(encodedPhone, encodedName, contextData) {
 
   // Construire le message enrichi — infos critiques EN PREMIER
   var lines = [];
-  lines.push('🚕 *AMBI241 — NOUVELLE COMMANDE TAXI PRO*');
+  lines.push('🚕 *AMBI HOTEL — NOUVELLE COMMANDE TAXI PRO*');
   lines.push('');
   // Résumé immédiat (visible même si message tronqué)
   if(clientName && to)   lines.push('👤 *' + clientName + '* → 🏁 *' + to + '*');
@@ -335,7 +335,7 @@ function openWhatsApp(encodedPhone, encodedName, contextData) {
   lines.push(dashLink);
   lines.push('');
   lines.push('_Bonjour ' + (name||'Chauffeur') + ', merci de confirmer votre disponibilité._');
-  lines.push('_— AMBI241 Taxi Pro, Libreville 🇬🇦_');
+  lines.push('_— AMBI HOTEL Taxi Pro, Libreville 🇬🇦_');
 
   var msg = encodeURIComponent(lines.join('\n'));
   window.open('https://wa.me/' + clean + '?text=' + msg, '_blank');
@@ -922,7 +922,7 @@ function taxiShareWhatsApp() {
     return;
   }
   const mapsLink = 'https://maps.google.com/?q=' + _taxiUserLat + ',' + _taxiUserLng;
-  const text = encodeURIComponent('🚕 *Taxi Pro AMBI241* — Mon point de départ :\n📍 ' + mapsLink + '\n\nPouvez-vous venir me chercher ici ?');
+  const text = encodeURIComponent('🚕 *Taxi Pro AMBI HOTEL* — Mon point de départ :\n📍 ' + mapsLink + '\n\nPouvez-vous venir me chercher ici ?');
   window.open('https://wa.me/?text=' + text, '_blank');
   showTaxiNotification('💬 WhatsApp ouvert avec votre position...');
 }
@@ -1898,7 +1898,7 @@ window.tdbLoadHistoryFromFirestore= tdbLoadHistoryFromFirestore;
               : window.location.href.split('?')[0].replace(/\/[^\/]*$/, '/'); // fallback file://
   window.AMBI241_APP_URL = saved || auto || null;
   if (!window.AMBI241_APP_URL) {
-    console.warn('AMBI241: URL non configurée - liens WhatsApp chauffeur désactivés');
+    console.warn('AMBI HOTEL: URL non configurée - liens WhatsApp chauffeur désactivés');
   }
 })();
 window.setAmbi241AppUrl = function(url) {
@@ -2031,14 +2031,14 @@ window.adminDesignDriver = function(uid, email, pseudo, _unused_password, phone)
 
   showToast('✅ ' + pseudo + ' désigné Chauffeur + ajouté à la liste 24H !');
   // ── Envoyer un email Firebase de définition de mot de passe ──
-  // Le chauffeur reçoit un lien pour choisir son mot de passe AMBI241
+  // Le chauffeur reçoit un lien pour choisir son mot de passe AMBI HOTEL
   if(email && window.fbSendPasswordResetEmail && window.auth){
     window.fbSendPasswordResetEmail(window.auth, email).then(function(){
       showToast('📧 Lien de connexion envoyé à ' + email);
       addAdminLog('📧 Email activation Chauffeur envoyé → ' + pseudo + ' (' + email + ')', 'driver_activation_email');
     }).catch(function(err){
       if(err.code === 'auth/user-not-found' || err.code === 'auth/invalid-credential'){
-        showToast('⚠️ ' + pseudo + ' doit d\'abord créer un compte AMBI241 avec cet email.');
+        showToast('⚠️ ' + pseudo + ' doit d\'abord créer un compte AMBI HOTEL avec cet email.');
       }
       // Autres erreurs ignorées silencieusement — le chauffeur peut se connecter avec son compte existant
     });
@@ -2114,7 +2114,7 @@ function _showChauffeurLoginGate() {
         <div style="font-size:0.72rem;color:var(--muted);margin-top:0.25rem;">Accès sécurisé — Membres Chauffeurs uniquement</div>
       </div>
       <div style="margin-bottom:0.7rem;">
-        <label style="font-size:0.72rem;color:var(--muted);display:block;margin-bottom:0.3rem;">Email de votre compte AMBI241</label>
+        <label style="font-size:0.72rem;color:var(--muted);display:block;margin-bottom:0.3rem;">Email de votre compte AMBI HOTEL</label>
         <input id="_cgEmail" type="email" placeholder="votre@email.com" style="width:100%;background:var(--surface2);border:1px solid rgba(157,132,255,0.25);border-radius:9px;color:var(--text);padding:0.55rem 0.7rem;font-size:0.85rem;font-family:DM Sans,sans-serif;outline:none;">
       </div>
       <div style="margin-bottom:1rem;">
@@ -2150,7 +2150,7 @@ function _verifyChauffeurLogin() {
   if(driver.status === 'pending') { msg.textContent='Votre demande est en attente de validation Admin.'; msg.style.display='block'; return; }
   if(driver.status === 'revoked') { msg.textContent='Accès révoqué. Contactez l\'Admin.'; msg.style.display='block'; return; }
 
-  // ── Authentification via Firebase Auth (même compte AMBI241) ──
+  // ── Authentification via Firebase Auth (même compte AMBI HOTEL) ──
   if(!window.fbSignIn || !window.auth) {
     // Firebase indisponible : afficher un message clair
     msg.textContent='Service d\'authentification indisponible. Réessayez dans quelques instants.';
@@ -2174,9 +2174,9 @@ function _verifyChauffeurLogin() {
     if(btn){ btn.disabled=false; btn.textContent='🔓 Accéder à mon Tableau de Bord'; }
     var code = err.code || '';
     var errMsg = (code === 'auth/wrong-password' || code === 'auth/invalid-credential')
-      ? 'Mot de passe incorrect. Utilisez le même que votre compte AMBI241.'
+      ? 'Mot de passe incorrect. Utilisez le même que votre compte AMBI HOTEL.'
       : (code === 'auth/user-not-found' || code === 'auth/invalid-email')
-        ? 'Aucun compte AMBI241 trouvé pour cet email.'
+        ? 'Aucun compte AMBI HOTEL trouvé pour cet email.'
         : (code === 'auth/too-many-requests')
           ? 'Trop de tentatives. Réessayez plus tard.'
           : 'Erreur : ' + (err.message||code);
@@ -2415,7 +2415,7 @@ function _showChauffeurBoard(driver) {
       </div>
     </div>
     <div style="background:rgba(255,68,102,0.05);border:1px solid rgba(255,68,102,0.2);border-radius:12px;padding:0.8rem;font-size:0.68rem;color:var(--red);line-height:1.6;">
-      🔐 <strong>Données confidentielles</strong> — Vos informations ne sont visibles que par vous et l'Admin AMBI241.
+      🔐 <strong>Données confidentielles</strong> — Vos informations ne sont visibles que par vous et l'Admin AMBI HOTEL.
     </div>
   </div>
   `;
@@ -4594,7 +4594,7 @@ function contactChauffeurWithOrder(phoneNumber, chauffeurName, driverId, orderDe
   const validationLink = buildDriverValidationLink(token);
   
   // Message WhatsApp avec lien de commande
-  const message = `Bonjour ${chauffeurName},\n\n📋 NOUVELLE COMMANDE AMBI241\n\nClient: ${getCurrentUserName()}\nLocalisation: [À confirmer]\n\n🔗 Voir détails & valider: ${validationLink}\n\nMerci!`;
+  const message = `Bonjour ${chauffeurName},\n\n📋 NOUVELLE COMMANDE AMBI HOTEL\n\nClient: ${getCurrentUserName()}\nLocalisation: [À confirmer]\n\n🔗 Voir détails & valider: ${validationLink}\n\nMerci!`;
   
   const encodedMessage = encodeURIComponent(message);
   const whatsappUrl = `https://wa.me/${cleaned}?text=${encodedMessage}`;
@@ -4798,7 +4798,7 @@ function getCurrentUserId() {
 // Fonction pour obtenir le nom utilisateur actuel
 function getCurrentUserName() {
   const user = getCurrentUser();
-  return user ? user.name : 'Client AMBI241';
+  return user ? user.name : 'Client AMBI HOTEL';
 }
 
 // Vérifier le lien de validation au chargement
